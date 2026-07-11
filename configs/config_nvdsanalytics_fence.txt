@@ -1,0 +1,35 @@
+[property]
+enable=1
+config-width=1920
+config-height=1080
+osd-mode=2
+display-font-size=18
+
+# Raw polygon from configs/fence/main_zone.txt was annotated on 2560x1440:
+# 397;361;1951;412;2023;1262;409;1287
+# v7 user-corrected polygon used by DeepStream analytics at 1920x1080:
+# 770;240;1460;280;1100;720;135;620
+# Rule target: person is considered inside when foot point is inside this polygon.
+# With nvdsanalytics, ROI/line logic is an approximation; exact 65%% bbox-overlap
+# and foot-point state machine require a custom pad-probe/app stage.
+[roi-filtering-stream-0]
+enable=1
+class-id=0
+inverse-roi=0
+roi-MAIN_ZONE=770;240;1460;280;1100;720;135;620
+
+[line-crossing-stream-0]
+enable=1
+class-id=0
+extended=0
+mode=balanced
+# Four-edge crossing. ENTER_* means outside -> inside through that edge.
+# EXIT_* means inside -> outside through that edge.
+line-crossing-ENTER_E1=1161;222;1069;298;770;240;1460;280
+line-crossing-EXIT_E1=1069;298;1161;222;770;240;1460;280
+line-crossing-ENTER_E2=1340;505;1220;495;1460;280;1100;720
+line-crossing-EXIT_E2=1220;495;1340;505;1460;280;1100;720
+line-crossing-ENTER_E3=571;708;664;632;1100;720;135;620
+line-crossing-EXIT_E3=664;632;571;708;1100;720;135;620
+line-crossing-ENTER_E4=393;425;512;435;135;620;770;240
+line-crossing-EXIT_E4=512;435;393;425;135;620;770;240
