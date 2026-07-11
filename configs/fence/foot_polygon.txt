@@ -1,0 +1,6 @@
+# Exact virtual fence polygon in 1920x1080 processing canvas.
+# Rule: a person is inside when the bottom-center foot point of the bbox is inside this polygon.
+770,240
+1460,280
+1100,720
+135,620
