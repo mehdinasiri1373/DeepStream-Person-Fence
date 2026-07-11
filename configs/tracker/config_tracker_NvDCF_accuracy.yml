@@ -1,0 +1,56 @@
+# Stage5 NvDCF sticky tracker tuning v2.
+# Base: user's best stage5_web_live_clean_v4_tracker_v1 + sticky v1.
+# Goal: reduce ID fragmentation while preserving the good bbox geometry from v1.
+# IMPORTANT: live/save pipeline and detector geometry are not changed.
+BaseConfig:
+  minDetectorConfidence: 0.50
+  minTrackerConfidence: 0.12
+  enablePastFrame: 1
+
+TargetManagement:
+  enableBboxUnClipping: 1
+  preserveStreamUpdateOrder: 0
+  maxTargetsPerStream: 48
+  # Higher value = harder to spawn a new ID near an existing track.
+  minIouDiff4NewTarget: 0.97
+  # Longer confirmation and shadow ages reduce short false/fragmented IDs.
+  probationAge: 10
+  maxShadowTrackingAge: 220
+  earlyTerminationAge: 12
+
+TrajectoryManagement:
+  useUniqueID: 1
+  minTrajectoryLength4Projection: 10
+  prepLength4TrajectoryProjection: 10
+  trajectoryProjectionLength: 30
+  maxAngle4TrackletMatching: 90
+
+DataAssociator:
+  dataAssociatorType: 0
+  associationMatcherType: 1
+  checkClassMatch: 1
+  # Relax association so a temporarily shifted detector bbox can still keep the same ID.
+  minMatchingScore4Overall: 0.18
+  minMatchingScore4SizeSimilarity: 0.10
+  minMatchingScore4Iou: 0.03
+  minMatchingScore4VisualSimilarity: 0.10
+  # Put more weight on visual DCF appearance, less on noisy IoU/size.
+  matchingScoreWeight4VisualSimilarity: 0.74
+  matchingScoreWeight4SizeSimilarity: 0.06
+  matchingScoreWeight4Iou: 0.20
+
+StateEstimator:
+  stateEstimatorType: 2
+  processNoiseVar4Loc: 2.0
+  processNoiseVar4Size: 1.0
+  processNoiseVar4Vel: 0.1
+  measurementNoiseVar4Detector: 4.0
+  measurementNoiseVar4Tracker: 16.0
+
+VisualTracker:
+  visualTrackerType: 1
+  useColorNames: 1
+  useHog: 1
+  featureImgSizeLevel: 3
+  searchRegionPaddingScale: 3
+  maxFeatureVectorsPerStream: 400

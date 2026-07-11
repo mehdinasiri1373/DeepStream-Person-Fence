@@ -1,0 +1,18 @@
+# IOU baseline: bare minimum. Use only for sanity/FPS baseline.
+BaseConfig:
+  minDetectorConfidence: 0.55
+  enablePastFrame: 0
+
+TargetManagement:
+  maxTargetsPerStream: 150
+  probationAge: 1
+  maxShadowTrackingAge: 15
+  earlyTerminationAge: 1
+
+DataAssociator:
+  dataAssociatorType: 0
+  associationMatcherType: 0
+  checkClassMatch: 1
+  minMatchingScore4Overall: 0.20
+  minMatchingScore4Iou: 0.20
+  matchingScoreWeight4Iou: 1.0

@@ -1,0 +1,34 @@
+# NvDCF performance-oriented template.
+BaseConfig:
+  minDetectorConfidence: 0.55
+  minTrackerConfidence: 0.15
+  enablePastFrame: 0
+
+TargetManagement:
+  maxTargetsPerStream: 150
+  minIouDiff4NewTarget: 0.75
+  probationAge: 2
+  maxShadowTrackingAge: 45
+  earlyTerminationAge: 2
+
+DataAssociator:
+  dataAssociatorType: 0
+  associationMatcherType: 1
+  checkClassMatch: 1
+  minMatchingScore4Overall: 0.15
+  minMatchingScore4SizeSimilarity: 0.15
+  minMatchingScore4Iou: 0.08
+  minMatchingScore4VisualSimilarity: 0.08
+  matchingScoreWeight4VisualSimilarity: 0.45
+  matchingScoreWeight4SizeSimilarity: 0.15
+  matchingScoreWeight4Iou: 0.40
+
+StateEstimator:
+  stateEstimatorType: 2
+
+VisualTracker:
+  visualTrackerType: 1
+  useColorNames: 1
+  useHog: 0
+  featureImgSizeLevel: 2
+  searchRegionPaddingScale: 3

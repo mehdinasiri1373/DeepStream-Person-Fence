@@ -1,0 +1,21 @@
+# NvSORT baseline template: fast, bbox-only. Use mainly as baseline.
+BaseConfig:
+  minDetectorConfidence: 0.55
+  enablePastFrame: 0
+
+TargetManagement:
+  maxTargetsPerStream: 150
+  probationAge: 3
+  maxShadowTrackingAge: 30
+  earlyTerminationAge: 1
+
+DataAssociator:
+  dataAssociatorType: 0
+  associationMatcherType: 1
+  checkClassMatch: 1
+  minMatchingScore4Overall: 0.20
+  minMatchingScore4Iou: 0.10
+  matchingScoreWeight4Iou: 1.0
+
+StateEstimator:
+  stateEstimatorType: 1

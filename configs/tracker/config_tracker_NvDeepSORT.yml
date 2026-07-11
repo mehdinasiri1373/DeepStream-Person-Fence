@@ -1,0 +1,36 @@
+# NvDeepSORT template. You must set a valid TensorRT ReID model path in the ReID section
+# according to your installed DeepStream sample config and model setup.
+BaseConfig:
+  minDetectorConfidence: 0.55
+  enablePastFrame: 1
+
+TargetManagement:
+  maxTargetsPerStream: 150
+  probationAge: 3
+  maxShadowTrackingAge: 60
+  earlyTerminationAge: 2
+
+DataAssociator:
+  dataAssociatorType: 1
+  associationMatcherType: 1
+  checkClassMatch: 1
+  thresholdMahalanobis: 12.0
+  minMatchingScore4Overall: 0.20
+  minMatchingScore4ReidSimilarity: 0.30
+  minMatchingScore4Iou: 0.05
+  matchingScoreWeight4ReIDSimilarity: 0.70
+  matchingScoreWeight4Iou: 0.30
+
+StateEstimator:
+  stateEstimatorType: 1
+
+ReID:
+  # TODO: update with your DeepStream/TensorRT ReID engine path.
+  # Example keys can differ by DeepStream version; compare with official config_tracker_NvDeepSORT.yml.
+  reidType: 1
+  batchSize: 16
+  workspaceSize: 1000
+  networkMode: 2
+  uffFile: ""
+  onnxFile: ""
+  modelEngineFile: "models/reid/reid.engine"
